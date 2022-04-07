@@ -18,7 +18,15 @@ def before_request():
 
 @app.route("/usuario/create", methods =['POST','GET'])
 def createUser():
-     if request.method ==  'POST':
+     if request.method ==  'POST':      
+
+
+               
+
+                        
+               
+
+
                 usuarioModel = UsuarioModel()
                 name=request.form.get('usuario')
                 email=request.form.get('email')
@@ -84,12 +92,24 @@ def createUser():
                        
                 if special == False:
                         isValid=False
-                        flash("Ingrese al menos un caracter a la contraseña")
+                        flash("Ingrese al menos un Caracter a la contraseña")
 
                 if isValid==False:
                         return render_template("user/crearUser.html",name=name,email=email,password=password)
-        
-                user.createUser(name=name,email=email,claveEncritada=encriptar)                 
+
+
+                validate_mail = ""                
+                for i in range(4):
+                        validate_mail += random.choice(string.ascii_letters)
+
+                vali_url = ""
+                for i in range(15):
+                        vali_url += random.choice(string.ascii_letters)
+
+                user.createUser(name=name,email=email,claveEncritada=encriptar,validate_mail=validate_mail,vali_url=vali_url) 
+
+                content= 'Para validar su cuentra ingrese aqui http://127.0.0.1:5000/val-acount/'+vali_url+'?token='+validate_mail+''
+                user.valiCorreo(valimail=email,content=content)             
                 return redirect(url_for("login"))
      else:
                 return render_template ("user/crearUser.html")
@@ -130,9 +150,22 @@ def logout():
 
 @app.route("/home")
 def home():
+
+
+
     return render_template ("home/home.html")
 
-@app.route("/validarcorreo")
-def valco():
-        return ("Validando correo")
-    
+
+
+@app.get("/val-acount/<urluser>")
+def validar_cuenta(urluser):
+    validate_mail = request.args.get("token")
+    userv = user.UserVal(validate_mail = validate_mail, vali_url=urluser)
+
+    if not userv:
+        return render_template("auth/error.html")
+    else:
+        user.UsuarioValidado(validate_mail = validate_mail, vali_url=urluser)
+
+    return render_template("auth/authvalidate.html")
+# Falata validar cuenta

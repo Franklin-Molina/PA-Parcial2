@@ -68,3 +68,36 @@ body {
 .login{
   margin-bottom: 20px;
 }
+
+.error-page{
+  padding: 10% 0 0;
+  margin: auto;
+}
+
+.imgerror{
+width: 100px;
+height: 100px;
+}
+
+.fallo {
+  border-radius: 5px;
+  position: relative;
+  z-index: 1;
+  background: #fdf2f2;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 25px 0 red;
+}
+.success {
+  border-radius: 5px;
+  position: relative;
+  z-index: 1;
+  background: #fdf2f2;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 25px 0 rgb(10, 170, 77);
+}
