@@ -22,9 +22,11 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) DEFAULT NULL,
   `correo` varchar(45) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL,
+  `password` varchar(200) DEFAULT NULL,
+  `validate_mail` varchar(100) DEFAULT NULL,
+  `vali_url` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- La exportación de datos fue deseleccionada.
 
